@@ -1,0 +1,30 @@
+class DinoGame {
+    field Dino dino;
+
+    constructor DinoGame new() {
+        let dino = Dino.new(1);
+        return this;
+    }
+
+    method void play() {
+        var boolean exit;
+        var char key;
+        let exit = false;
+        while (~exit) {
+            do dino.draw();
+            let key = Keyboard.keyPressed();
+            if (key = 131) {
+                do dino.jump(10);
+                do Sys.wait(5);
+            }
+            do Sys.wait(5);
+        }
+        return;
+    }
+
+    method void dispose() {
+        do dino.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+}
