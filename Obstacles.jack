@@ -1,15 +1,25 @@
 class Obstacle {
     field int xPos;
     field int yPos;
+    field int size;
     field int xSpeed;
-
-    method void init(int x, int y, int speed) {
-        xPos = x;
-        yPos = y;
-        xSpeed = speed;
+    
+    constructor Obstacle new(int x, int y, int s, int speed) {
+        let xPos = x;
+        let yPos = y;
+        let size = s;
+        let xSpeed = speed;
+        return this;
     }
 
-    method void update() {
-        xPos = xPos - xSpeed;
+    method void move() {
+        let xPos = xPos - xSpeed;
+        return;
+    }
+
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(xPos, yPos, xPos + size, yPos + size);
+        return;
     }
 }
