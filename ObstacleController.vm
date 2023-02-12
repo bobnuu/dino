@@ -1,0 +1,110 @@
+function ObstacleController.new 0
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push constant 0
+push constant 0
+call Obstacle.new 2
+pop this 1
+push constant 0
+push constant 0
+call Obstacle.new 2
+pop this 2
+push this 1
+push this 2
+call Obstacle.setNext 2
+pop temp 0
+push this 2
+push this 1
+call Obstacle.setPrev 2
+pop temp 0
+push constant 100
+pop this 3
+push pointer 0
+return
+function ObstacleController.move 1
+push argument 0
+pop pointer 0
+push pointer 0
+call ObstacleController.checkNewObstacle 1
+pop temp 0
+push this 1
+call Obstacle.getNext 1
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 2
+eq
+not
+not
+if-goto WHILE_END0
+push local 0
+push argument 1
+call Obstacle.move 2
+pop temp 0
+push local 0
+call Obstacle.getNext 1
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function ObstacleController.checkNewObstacle 0
+push argument 0
+pop pointer 0
+push this 3
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call ObstacleController.addNewObstacle 1
+pop temp 0
+push constant 100
+pop this 3
+label IF_FALSE0
+push this 3
+push constant 1
+sub
+pop this 3
+push constant 0
+return
+function ObstacleController.addNewObstacle 2
+push argument 0
+pop pointer 0
+push constant 5
+push constant 20
+call Obstacle.new 2
+pop local 0
+push this 2
+call Obstacle.getPrev 1
+pop local 1
+push local 1
+push local 0
+call Obstacle.setNext 2
+pop temp 0
+push local 0
+push local 1
+call Obstacle.setPrev 2
+pop temp 0
+push local 0
+push this 2
+call Obstacle.setNext 2
+pop temp 0
+push this 2
+push local 0
+call Obstacle.setPrev 2
+pop temp 0
+push constant 0
+return
+function ObstacleController.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

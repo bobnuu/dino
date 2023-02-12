@@ -1,21 +1,33 @@
 class DinoGame {
     field Dino dino;
+    field ObstacleController obstacles;
+    field int counter;
 
     constructor DinoGame new() {
         let dino = Dino.new(1);
+        let obstacles = ObstacleController.new(this);
+        let counter = 0;
         return this;
     }
 
+    method void incCounter() {
+        if (counter = 100) {
+            let counter = 0;
+        }
+        else {
+            let counter = counter + 1;
+        }
+        return;
+    }
+
     method void play() {
-        var boolean exit;
         var char key;
-        let exit = false;
-        while (~exit) {
-            do dino.draw();
+        while (true) {
+            do dino.run();
+            do obstacles.move(dino.getSpeed());
             let key = Keyboard.keyPressed();
             if (key = 131) {
-                do dino.jump(10);
-                do Sys.wait(5);
+                do dino.jump(15);
             }
             do Sys.wait(5);
         }
@@ -24,6 +36,7 @@ class DinoGame {
 
     method void dispose() {
         do dino.dispose();
+        do obstacles.dispose();
         do Memory.deAlloc(this);
         return;
     }

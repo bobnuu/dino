@@ -1,24 +1,52 @@
 function DinoGame.new 0
-push constant 1
+push constant 3
 call Memory.alloc 1
 pop pointer 0
 push constant 1
 call Dino.new 1
 pop this 0
 push pointer 0
+call ObstacleController.new 1
+pop this 1
+push constant 0
+pop this 2
+push pointer 0
+return
+function DinoGame.incCounter 0
+push argument 0
+pop pointer 0
+push this 2
+push constant 100
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+pop this 2
+goto IF_END0
+label IF_FALSE0
+push this 2
+push constant 1
+add
+pop this 2
+label IF_END0
+push constant 0
 return
 function DinoGame.play 2
 push argument 0
 pop pointer 0
-push constant 0
-pop local 0
 label WHILE_EXP0
-push local 0
+push constant 0
 not
 not
 if-goto WHILE_END0
 push this 0
-call Dino.draw 1
+call Dino.run 1
+pop temp 0
+push this 1
+push this 0
+call Dino.getSpeed 1
+call ObstacleController.move 2
 pop temp 0
 call Keyboard.keyPressed 0
 pop local 1
@@ -29,11 +57,8 @@ if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push this 0
-push constant 10
+push constant 15
 call Dino.jump 2
-pop temp 0
-push constant 5
-call Sys.wait 1
 pop temp 0
 label IF_FALSE0
 push constant 5
@@ -48,6 +73,9 @@ push argument 0
 pop pointer 0
 push this 0
 call Dino.dispose 1
+pop temp 0
+push this 1
+call ObstacleController.dispose 1
 pop temp 0
 push pointer 0
 call Memory.deAlloc 1

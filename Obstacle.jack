@@ -1,25 +1,57 @@
 class Obstacle {
+    field Obstacle prev;
+    field Obstacle next;
+    field boolean abstract;
     field int xPos;
-    field int yPos;
-    field int size;
-    field int xSpeed;
+    field int xSize;
+    field int ySize;
     
-    constructor Obstacle new(int x, int y, int s, int speed) {
-        let xPos = x;
-        let yPos = y;
-        let size = s;
-        let xSpeed = speed;
+    constructor Obstacle new(int x, int y) {
+        let xPos = 511 - x;
+        let xSize = x;
+        let ySize = y;
         return this;
     }
 
-    method void move() {
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void setPrev(Obstacle obs) {
+        let prev = obs;
+        return;
+    }
+
+    method void setNext(Obstacle obs) {
+        let next = obs;
+        return;
+    }
+
+    method Obstacle getPrev() {
+        return prev;
+    }
+
+    method Obstacle getNext() {
+        return next;
+    }
+
+    method void move(int xSpeed) {
+        do erase();
         let xPos = xPos - xSpeed;
+        do draw();
         return;
     }
 
     method void draw() {
         do Screen.setColor(true);
-        do Screen.drawRectangle(xPos, yPos, xPos + size, yPos + size);
+        do Screen.drawRectangle(xPos, 255 - ySize, xPos + xSize, 255);
+        return;
+    }
+
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(xPos, 255 - ySize, xPos + xSize, 255);
         return;
     }
 }

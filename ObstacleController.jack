@@ -1,0 +1,53 @@
+class ObstacleController {
+    field DinoGame game;
+    field Obstacle head;
+    field Obstacle tail;
+    field int nextObstacleInterval;
+
+    constructor ObstacleController new(DinoGame currGame) {
+        let game = currGame;
+        let head = Obstacle.new(0, 0);
+        let tail = Obstacle.new(0, 0);
+        do head.setNext(tail);
+        do tail.setPrev(head);
+        let nextObstacleInterval = 100;
+        return this;
+    }
+
+    method void move(int speed) {
+        var Obstacle current;
+        do checkNewObstacle();
+        let current = head.getNext();
+        while (~(current = tail)) {
+            do current.move(speed);
+            let current = current.getNext();
+        }
+        return;
+    }
+
+    method void checkNewObstacle() {
+        if (nextObstacleInterval = 0) {
+            do addNewObstacle();
+            let nextObstacleInterval = 100;
+        }
+        let nextObstacleInterval = nextObstacleInterval - 1;
+        return;
+    }
+
+    method void addNewObstacle() {
+        var Obstacle new;
+        var Obstacle prev;
+        let new = Obstacle.new(5, 20);
+        let prev = tail.getPrev();
+        do prev.setNext(new);
+        do new.setPrev(prev);
+        do new.setNext(tail);
+        do tail.setPrev(new);
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

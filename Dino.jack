@@ -24,27 +24,36 @@ class Dino {
         return ;
     }
 
+    method void run() {
+        var int yNew;
+        let yNew = yPos;
+        if (yPos > 0) {
+            let ySpeed = ySpeed + yAcc;
+        }
+        if (~(ySpeed = 0)) {
+            let yNew = yPos + ySpeed;
+            if (yNew < 0) {
+                let yNew = 0;
+            }
+        }
+        if (~(yPos = yNew)) {
+            // Position changed
+            do erase();
+            let yPos = yNew;
+            do draw();
+        }
+        return;
+    }
+
     method void draw() {
         var int yTop;
         let yTop = 256 - ySize - yPos;
-        do calculatePos();
         do Drawer.drawDino(32 * yTop + (leftMargin / 16));
         return;
     }
 
     method void erase() {
         var int y1, y2, tx1;
-
-        // For debugging. We can identify when the erase function is called.
-        if (ySpeed > 0) {
-            let tx1 = leftMargin - 2;
-        }
-        else {
-            let tx1 = leftMargin + xSize;
-        }
-        do Screen.setColor(true);
-        do Screen.drawRectangle( tx1, 255 - yPos - ySize - 2, tx1 + 2, 255 - yPos - ySize);
-
         let y2 = 255 - yPos;
         let y1 = y2 - ySize;
         do Screen.setColor(false);
@@ -53,27 +62,13 @@ class Dino {
     }
 
     method void jump(int acc) {
-        let ySpeed = acc;
+        if (yPos = 0) {
+            let ySpeed = acc;
+        }
         return;
     }
 
-    method void calculatePos() {
-        var int yNew;
-        let yNew = yPos;
-        let ySpeed = ySpeed + yAcc;
-        if ((yNew + ySpeed) > 0) {
-            let yNew = yNew + ySpeed;
-        }
-        else {
-            let yNew = 0;
-            let ySpeed = 0;
-        }
-        if (~(yPos = yNew) | (yPos > 0)) {
-            // Position changed
-            do erase();
-        }
-        do Sys.wait(4);
-        let yPos = yNew;
-        return;
+    method int getSpeed() {
+        return xSpeed;
     }
 }
