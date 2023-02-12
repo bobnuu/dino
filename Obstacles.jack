@@ -1,0 +1,15 @@
+class Obstacle {
+    field int xPos;
+    field int yPos;
+    field int xSpeed;
+
+    method void init(int x, int y, int speed) {
+        xPos = x;
+        yPos = y;
+        xSpeed = speed;
+    }
+
+    method void update() {
+        xPos = xPos - xSpeed;
+    }
+}
