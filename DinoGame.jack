@@ -13,8 +13,8 @@ class DinoGame {
         let counter = 0;
         let gameOver = false;
         let score = 0;
-        do Output.moveCursor(1, 50);
-        do Output.printString("Your score: ");
+        do Output.moveCursor(1, 54);
+        do Output.printString("Score: ");
         do Output.printInt(0);
         return this;
     }
@@ -80,6 +80,7 @@ class DinoGame {
             do Sys.wait(5);
             do incCounter();
         }
+        do Drawer.printFinalScore(score);
         return;
     }
 

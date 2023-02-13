@@ -72,7 +72,7 @@ class ObstacleController {
     method void addNewObstacle() {
         var Obstacle new;
         var Obstacle prev;
-        let new = Obstacle.new(this, randomizer.randInt(2, 15), randomizer.randInt(10, 40));
+        let new = Obstacle.new(this, randomizer.randInt(5, 30), randomizer.randInt(10, 50));
         let prev = tail.getPrev();
         do prev.setNext(new);
         do new.setPrev(prev);
