@@ -24,6 +24,18 @@ class Dino {
         return ;
     }
 
+    method int getYPos() {
+        return yPos;
+    }
+
+    method int getXPos() {
+        return leftMargin;
+    }
+
+    method int getXSize() {
+        return xSize;
+    }
+
     method void run() {
         var int yNew;
         let yNew = yPos;

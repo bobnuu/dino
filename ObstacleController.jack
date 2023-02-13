@@ -6,12 +6,21 @@ class ObstacleController {
 
     constructor ObstacleController new(DinoGame currGame) {
         let game = currGame;
-        let head = Obstacle.new(0, 0);
-        let tail = Obstacle.new(0, 0);
+        let head = Obstacle.new(this, 0, 0);
+        let tail = Obstacle.new(this, 0, 0);
         do head.setNext(tail);
         do tail.setPrev(head);
         let nextObstacleInterval = 100;
         return this;
+    }
+
+    method Dino getDino() {
+        return game.getDino();
+    }
+
+    method void stopGame() {
+        do game.stop();
+        return;
     }
 
     method void move(int speed) {
@@ -19,7 +28,13 @@ class ObstacleController {
         do checkNewObstacle();
         let current = head.getNext();
         while (~(current = tail)) {
-            do current.move(speed);
+            if (current.canMoveFurther(speed)) {
+                do current.move(speed);
+            }
+            else {
+                do removeObstacle(current);
+            }
+            
             let current = current.getNext();
         }
         return;
@@ -37,12 +52,23 @@ class ObstacleController {
     method void addNewObstacle() {
         var Obstacle new;
         var Obstacle prev;
-        let new = Obstacle.new(5, 20);
+        let new = Obstacle.new(this, 5, 20);
         let prev = tail.getPrev();
         do prev.setNext(new);
         do new.setPrev(prev);
         do new.setNext(tail);
         do tail.setPrev(new);
+        return;
+    }
+
+    method void removeObstacle(Obstacle o) {
+        var Obstacle prev, next;
+        do o.erase();
+        let prev = o.getPrev();
+        let next = o.getNext();
+        do prev.setNext(next);
+        do next.setPrev(prev);
+        do o.dispose();
         return;
     }
 

@@ -2,11 +2,13 @@ class DinoGame {
     field Dino dino;
     field ObstacleController obstacles;
     field int counter;
+    field boolean gameOver;
 
     constructor DinoGame new() {
         let dino = Dino.new(1);
         let obstacles = ObstacleController.new(this);
         let counter = 0;
+        let gameOver = false;
         return this;
     }
 
@@ -20,16 +22,32 @@ class DinoGame {
         return;
     }
 
+    method int getCounter() {
+        return counter;
+    }
+
+    method void stop() {
+        let gameOver = true;
+        return;
+    }
+
+    method Dino getDino() {
+        return dino;
+    }
+
     method void play() {
         var char key;
-        while (true) {
-            do dino.run();
+        while (~gameOver) {
+            if (3 * (counter / 3) = counter) {
+                do dino.run();
+            }
             do obstacles.move(dino.getSpeed());
             let key = Keyboard.keyPressed();
             if (key = 131) {
                 do dino.jump(15);
             }
             do Sys.wait(5);
+            do incCounter();
         }
         return;
     }

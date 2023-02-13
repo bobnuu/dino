@@ -30,6 +30,21 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+function Dino.getYPos 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Dino.getXPos 0
+push argument 0
+pop pointer 0
+push this 6
+return
+function Dino.getXSize 0
+push argument 0
+pop pointer 0
+push this 0
+return
 function Dino.run 1
 push argument 0
 pop pointer 0

@@ -1,4 +1,5 @@
 class Obstacle {
+    field ObstacleController controller;
     field Obstacle prev;
     field Obstacle next;
     field boolean abstract;
@@ -6,7 +7,8 @@ class Obstacle {
     field int xSize;
     field int ySize;
     
-    constructor Obstacle new(int x, int y) {
+    constructor Obstacle new(ObstacleController c,int x, int y) {
+        let controller = c;
         let xPos = 511 - x;
         let xSize = x;
         let ySize = y;
@@ -40,7 +42,14 @@ class Obstacle {
         do erase();
         let xPos = xPos - xSpeed;
         do draw();
+
+        do checkGameOver();
+        // do checkScore();
         return;
+    }
+
+    method boolean canMoveFurther(int speed) {
+        return ~(xPos < speed);
     }
 
     method void draw() {
@@ -52,6 +61,19 @@ class Obstacle {
     method void erase() {
         do Screen.setColor(false);
         do Screen.drawRectangle(xPos, 255 - ySize, xPos + xSize, 255);
+        return;
+    }
+
+    method void checkGameOver(){
+        var Dino dino;
+        var boolean s0, s1, s2;
+        let dino = controller.getDino();
+        let s0 = (dino.getXPos() + dino.getXSize() > xPos);
+        let s1 = (xPos + xSize > dino.getXPos());
+        let s2 = (ySize > dino.getYPos());
+        if (s0 & s1 & s2) {
+            do controller.stopGame();
+        }
         return;
     }
 }
