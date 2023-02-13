@@ -68,12 +68,13 @@ class Obstacle {
 
     method void checkGameOver(){
         var Dino dino;
-        var boolean s0, s1, s2;
+        var boolean s0, s1, s2, s3;
         let dino = controller.getDino();
         let s0 = (dino.getXPos() + dino.getXSize() > xPos);
         let s1 = (xPos + xSize > dino.getXPos());
         let s2 = (ySize > dino.getYPos());
-        if (s0 & s1 & s2) {
+        let s3 = (dino.getSuperDinoLimit() = 0);
+        if (s0 & s1 & s2 & s3) {
             do controller.stopGame();
         }
         return;

@@ -77,6 +77,9 @@ class DinoGame {
                 do dino.jump(16);
                 do randomizer.setSeed(counter);
             }
+            if (key = 83) {
+                do dino.setSuperDinoLimit(400);
+            }
 
             do Sys.wait(5);
             do incCounter();
