@@ -1,5 +1,5 @@
 function ObstacleController.new 0
-push constant 4
+push constant 7
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -22,7 +22,17 @@ push this 2
 push this 1
 call Obstacle.setPrev 2
 pop temp 0
-push constant 100
+push constant 53
+call Randomizer.new 1
+pop this 6
+push constant 200
+pop this 4
+push constant 300
+pop this 5
+push this 6
+push this 4
+push this 5
+call Randomizer.randint 3
 pop this 3
 push pointer 0
 return
@@ -38,6 +48,27 @@ pop pointer 0
 push this 0
 call DinoGame.stop 1
 pop temp 0
+push constant 0
+return
+function ObstacleController.incScore 0
+push argument 0
+pop pointer 0
+push this 0
+call DinoGame.incScore 1
+pop temp 0
+push constant 0
+return
+function ObstacleController.decInterval 0
+push argument 0
+pop pointer 0
+push this 4
+push constant 2
+sub
+pop this 4
+push this 5
+push constant 2
+sub
+pop this 5
 push constant 0
 return
 function ObstacleController.move 1
@@ -92,7 +123,10 @@ label IF_TRUE0
 push pointer 0
 call ObstacleController.addNewObstacle 1
 pop temp 0
-push constant 100
+push this 6
+push this 4
+push this 5
+call Randomizer.randint 3
 pop this 3
 label IF_FALSE0
 push this 3

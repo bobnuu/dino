@@ -6,12 +6,14 @@ class Obstacle {
     field int xPos;
     field int xSize;
     field int ySize;
+    field boolean passedDino;
     
     constructor Obstacle new(ObstacleController c,int x, int y) {
         let controller = c;
         let xPos = 511 - x;
         let xSize = x;
         let ySize = y;
+        let passedDino = false;
         return this;
     }
 
@@ -44,7 +46,7 @@ class Obstacle {
         do draw();
 
         do checkGameOver();
-        // do checkScore();
+        do checkScore();
         return;
     }
 
@@ -73,6 +75,16 @@ class Obstacle {
         let s2 = (ySize > dino.getYPos());
         if (s0 & s1 & s2) {
             do controller.stopGame();
+        }
+        return;
+    }
+
+    method void checkScore() {
+        var Dino dino;
+        let dino = controller.getDino();
+        if ((dino.getXPos() > (xPos + xSize)) & ~passedDino) {
+            do controller.incScore();
+            let passedDino = true;
         }
         return;
     }

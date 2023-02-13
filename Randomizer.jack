@@ -1,0 +1,33 @@
+class Randomizer {
+    field int seed;
+
+    constructor Randomizer new(int s) {
+        let seed = s;
+        return this;
+    }
+
+    method int randint(int min, int max) {
+        var int a, m, c, res;
+        let m = max - min;
+        if (m = 79) {
+            let c = 83;
+        }
+        else {
+            let c = 79;
+        }
+        if (m = 97) {
+            let a = 103;
+        }
+        else {
+            let a = 97;
+        }
+        let res = min + mod((a * seed + c), m);
+        let seed = res;
+        
+        return res;
+    }
+
+    method int mod(int a, int b) {
+        return (a - (a / b * b));
+    }
+}

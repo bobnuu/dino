@@ -3,6 +3,8 @@ class ObstacleController {
     field Obstacle head;
     field Obstacle tail;
     field int nextObstacleInterval;
+    field int minObsInterval, maxObsInterval;
+    field Randomizer randomizer;
 
     constructor ObstacleController new(DinoGame currGame) {
         let game = currGame;
@@ -10,7 +12,10 @@ class ObstacleController {
         let tail = Obstacle.new(this, 0, 0);
         do head.setNext(tail);
         do tail.setPrev(head);
-        let nextObstacleInterval = 100;
+        let randomizer = Randomizer.new(53);
+        let minObsInterval = 200;
+        let maxObsInterval = 300;
+        let nextObstacleInterval = randomizer.randint(minObsInterval, maxObsInterval);
         return this;
     }
 
@@ -20,6 +25,17 @@ class ObstacleController {
 
     method void stopGame() {
         do game.stop();
+        return;
+    }
+
+    method void incScore() {
+        do game.incScore();
+        return;
+    }
+
+    method void decInterval() {
+        let minObsInterval = minObsInterval - 2;
+        let maxObsInterval = maxObsInterval - 2;
         return;
     }
 
@@ -43,7 +59,7 @@ class ObstacleController {
     method void checkNewObstacle() {
         if (nextObstacleInterval = 0) {
             do addNewObstacle();
-            let nextObstacleInterval = 100;
+            let nextObstacleInterval = randomizer.randint(minObsInterval, maxObsInterval);
         }
         let nextObstacleInterval = nextObstacleInterval - 1;
         return;

@@ -64,6 +64,11 @@ class Dino {
         return;
     }
 
+    method void incSpeed() {
+        let xSpeed = xSpeed + 1;
+        return;
+    }
+
     method void erase() {
         var int y1, y2, tx1;
         let y2 = 255 - yPos;
