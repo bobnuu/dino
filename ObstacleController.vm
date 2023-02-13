@@ -32,7 +32,7 @@ pop this 5
 push this 6
 push this 4
 push this 5
-call Randomizer.randint 3
+call Randomizer.randInt 3
 pop this 3
 push pointer 0
 return
@@ -126,7 +126,7 @@ pop temp 0
 push this 6
 push this 4
 push this 5
-call Randomizer.randint 3
+call Randomizer.randInt 3
 pop this 3
 label IF_FALSE0
 push this 3
@@ -139,8 +139,14 @@ function ObstacleController.addNewObstacle 2
 push argument 0
 pop pointer 0
 push pointer 0
-push constant 5
-push constant 20
+push this 6
+push constant 2
+push constant 15
+call Randomizer.randInt 3
+push this 6
+push constant 10
+push constant 40
+call Randomizer.randInt 3
 call Obstacle.new 3
 pop local 0
 push this 2

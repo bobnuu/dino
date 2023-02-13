@@ -15,7 +15,7 @@ class ObstacleController {
         let randomizer = Randomizer.new(53);
         let minObsInterval = 200;
         let maxObsInterval = 300;
-        let nextObstacleInterval = randomizer.randint(minObsInterval, maxObsInterval);
+        let nextObstacleInterval = randomizer.randInt(minObsInterval, maxObsInterval);
         return this;
     }
 
@@ -59,7 +59,7 @@ class ObstacleController {
     method void checkNewObstacle() {
         if (nextObstacleInterval = 0) {
             do addNewObstacle();
-            let nextObstacleInterval = randomizer.randint(minObsInterval, maxObsInterval);
+            let nextObstacleInterval = randomizer.randInt(minObsInterval, maxObsInterval);
         }
         let nextObstacleInterval = nextObstacleInterval - 1;
         return;
@@ -68,7 +68,7 @@ class ObstacleController {
     method void addNewObstacle() {
         var Obstacle new;
         var Obstacle prev;
-        let new = Obstacle.new(this, 5, 20);
+        let new = Obstacle.new(this, randomizer.randInt(2, 15), randomizer.randInt(10, 40));
         let prev = tail.getPrev();
         do prev.setNext(new);
         do new.setPrev(prev);

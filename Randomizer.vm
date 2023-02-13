@@ -6,7 +6,7 @@ push argument 0
 pop this 0
 push pointer 0
 return
-function Randomizer.randint 4
+function Randomizer.randInt 4
 push argument 0
 pop pointer 0
 push argument 2

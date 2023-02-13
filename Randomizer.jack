@@ -6,7 +6,7 @@ class Randomizer {
         return this;
     }
 
-    method int randint(int min, int max) {
+    method int randInt(int min, int max) {
         var int a, m, c, res;
         let m = max - min;
         if (m = 79) {
