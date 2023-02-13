@@ -6,6 +6,11 @@ class Randomizer {
         return this;
     }
 
+    method void setSeed(int s) {
+        let seed = s;
+        return;
+    }
+
     method int randInt(int min, int max) {
         var int a, m, c, res;
         let m = max - min;

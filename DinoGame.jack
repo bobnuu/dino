@@ -1,13 +1,15 @@
 class DinoGame {
     field Dino dino;
     field ObstacleController obstacles;
+    field Randomizer randomizer;
     field int counter;
     field boolean gameOver;
     field int score;
 
     constructor DinoGame new() {
         let dino = Dino.new(1);
-        let obstacles = ObstacleController.new(this);
+        let randomizer = Randomizer.new(53);
+        let obstacles = ObstacleController.new(this, randomizer);
         let counter = 0;
         let gameOver = false;
         let score = 0;
@@ -66,13 +68,14 @@ class DinoGame {
         var char key;
         while (~gameOver) {
             do printScore();
-            if (3 * (counter / 3) = counter) {
+            if (4 * (counter / 4) = counter) {
                 do dino.run();
             }
             do obstacles.move(dino.getSpeed());
             let key = Keyboard.keyPressed();
             if (key = 131) {
                 do dino.jump(16);
+                do randomizer.setSeed(counter);
             }
             do Sys.wait(5);
             do incCounter();

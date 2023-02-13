@@ -22,10 +22,9 @@ push this 2
 push this 1
 call Obstacle.setPrev 2
 pop temp 0
-push constant 53
-call Randomizer.new 1
+push argument 1
 pop this 6
-push constant 200
+push constant 150
 pop this 4
 push constant 300
 pop this 5
@@ -62,13 +61,27 @@ function ObstacleController.decInterval 0
 push argument 0
 pop pointer 0
 push this 4
+push constant 50
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 4
 push constant 2
 sub
 pop this 4
+label IF_FALSE0
+push this 5
+push constant 100
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push this 5
 push constant 2
 sub
 pop this 5
+label IF_FALSE1
 push constant 0
 return
 function ObstacleController.move 1
