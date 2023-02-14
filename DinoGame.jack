@@ -1,3 +1,7 @@
+//Project 9 
+//Authors: Bobosher Musurmonov(2110156) and Miras Doshchanov(2110026)
+
+
 class DinoGame {
     field Dino dino;
     field ObstacleController obstacles;
