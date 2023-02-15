@@ -13,8 +13,8 @@ class ObstacleController {
         do head.setNext(tail);
         do tail.setPrev(head);
         let randomizer = r;
-        let minObsInterval = 150;
-        let maxObsInterval = 300;
+        let minObsInterval = 200;
+        let maxObsInterval = 400;
         let nextObstacleInterval = randomizer.randInt(minObsInterval, maxObsInterval);
         return this;
     }
@@ -34,10 +34,10 @@ class ObstacleController {
     }
 
     method void decInterval() {
-        if (minObsInterval > 50) {
+        if (minObsInterval > 100) {
             let minObsInterval = minObsInterval - 2;
         }
-        if (maxObsInterval > 100) {
+        if (maxObsInterval > 150) {
             let maxObsInterval = maxObsInterval - 2;
         }
         return;
